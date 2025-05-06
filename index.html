@@ -23,23 +23,6 @@
       animation: fadeDown 1s ease-out;
     }
 
-    .hamburger {
-      position: absolute;
-      left: 20px;
-      top: 20px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background: white;
-      transition: all 0.3s ease;
-    }
-
     #loginScreen, #errorScreen {
       position: fixed;
       inset: 0;
@@ -88,11 +71,31 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: width 0.3s;
+      transition: all 0.3s ease-in-out;
+      position: relative;
+      z-index: 3;
     }
 
     .sidebar.collapsed {
       width: 60px;
+    }
+
+    .sidebar-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar-logo {
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #ccc;
+      margin-bottom: 10px;
+      transition: transform 0.2s;
+    }
+
+    .sidebar-logo:hover {
+      transform: scale(1.1);
     }
 
     .sidebar .profile {
@@ -185,24 +188,20 @@
 
 <div class="main" id="dashboard" style="display: none;">
   <div class="sidebar" id="sidebar">
-    <div class="profile">
-      <img src="https://via.placeholder.com/80" alt="Profile Picture" />
-      <h3>User</h3>
+    <div class="sidebar-header">
+      <div class="sidebar-logo" onclick="toggleSidebar()">☰</div>
+      <div class="profile" id="profileSection">
+        <img src="https://via.placeholder.com/80" alt="Profile Picture" />
+        <h3>User</h3>
+      </div>
     </div>
     <div style="text-align: center; color: #777; font-size: 0.8em;">
       AVnas
     </div>
   </div>
 
-  <div class="content">
-    <header>
-      <div class="hamburger" onclick="toggleSidebar()">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      AVnas Dashboard
-    </header>
+  <div class="content" id="contentArea">
+    <header>AVnas Dashboard</header>
 
     <div class="upload-section">
       <input type="file" id="fileInput" multiple>
@@ -214,9 +213,9 @@
 </div>
 
 <script>
-  // SHA-256 hashes for: username=admin, password=1234
+  // SHA-256 hashes for username=admin, password=avbox
   const VALID_USERNAME_HASH = "8c6976e5b5410415bde908bd4dee15dfb16a7a60caa1d4c9e1e45eaeef8c3c6d";
-  const VALID_PASSWORD_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
+  const VALID_PASSWORD_HASH = "3e49dd38964de3d489e963068cc89333010d04eede8cf7ff6473ec040fdce01e";
 
   async function hashString(message) {
     const msgBuffer = new TextEncoder().encode(message);
@@ -241,12 +240,26 @@
     }
   }
 
-  // File viewer
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('collapsed');
+  }
+
+  document.addEventListener('click', function (event) {
+    const sidebar = document.getElementById('sidebar');
+    const logo = document.querySelector('.sidebar-logo');
+    const isClickInside = sidebar.contains(event.target) || logo.contains(event.target);
+
+    if (!isClickInside && !sidebar.classList.contains('collapsed')) {
+      sidebar.classList.add('collapsed');
+    }
+  });
+
   const fileInput = document.getElementById('fileInput');
   const fileList = document.getElementById('fileList');
   const viewer = document.getElementById('viewer');
 
-  fileInput.addEventListener('change', function() {
+  fileInput.addEventListener('change', function () {
     fileList.innerHTML = '';
     for (let file of fileInput.files) {
       const fileURL = URL.createObjectURL(file);
@@ -260,10 +273,6 @@
       fileList.appendChild(item);
     }
   });
-
-  function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('collapsed');
-  }
 </script>
 
 </body>

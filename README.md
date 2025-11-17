@@ -1,26 +1,10 @@
-<h1 align="center" id="title">NextJS Firebase Stripe Clerk - Google Drive Clone Project</h1>
+<h1 align="center" id="title">Google Drive Clone</h1>
 
-<p align="center"><img src="https://media.graphassets.com/u1mIG68sT6Gz79zhMurn" alt="project-image"></p>
-
-<p id="description">Embark on an exciting journey of building a Google Drive clone with the Next.js framework Firebase for backend functionality Stripe for payment integration and Clerk for authentication. This comprehensive course is designed for web developers eager to enhance their skills by creating a feature-rich cloud storage application that mirrors the functionality of Google Drive.</p>
+<p id="description"></p>
 
 <h2>🚀 Demo</h2>
 
-[https://drive.sammi.ac](https://drive.sammi.ac)
-
-<h2>🧐 Features</h2>
-
-Here're some of the project's best features:
-
-- Stripe Integration
-- Clerk Authentication
-- Firebase Backend
-- Light and Dark mode 🌓
-- List rename delete drag & drop reorder and copy
-- Stripe subscription for each organization to unlock unlimited boards
-- Zustand state management
-- Detail-oriented effects and animations using TailwindCSS
-- Environment Typescript NextJS Setup
+https://agr1m.github.io/NasUI/
 
 <h2>🛠️ Installation Steps:</h2>
 
@@ -52,13 +36,13 @@ npm run dev & yarn dev
 
 <h2>💻 Built with</h2>
 
-Technologies used in the project:
+Things used in the project:
 
 - ReactJS
-- NextJS app routes
+- TypeScript
 - NodeJS
+- NextJS app routes
 - TailwindCSS
 - ShadcnUI
 - Clerk
 - Stripe
-- TypeScript
